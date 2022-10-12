@@ -1,0 +1,113 @@
+// task 1
+/*
+    გვაქვს factory ობიექტი , რომელსაც აქვს რამდენიმე key-value წყვილი , 
+    ასევე მეთოდი calculateWorkload - აბრუნებს მხოლოდ თანამშრომლის შესრულებული სამუშაოების მასივს (მაგალითის მიხედვით [40,25,28,30,31])
+    და formatArray - რომელსაც გადაეცემა თანამშრომლის სახელი და აბრუნებს  ობიექტს თანამშრომლის სახელი  და ხელშეკრულების ამოწურვამდე
+    დარჩენილი დროის მნშვნელობებით. ხელშეკრულების პერიოდი ყველა თანამშრომლისთვის არის 5 წელი. 
+    მაგალითად ('John' ის შემთხვევაში დაგვიბრუნდება {name : "John", timeLeft : 4}) timeleft = 5 - timespent;
+    გვაქვს 
+    დალოგეთ calculateWorkload და formatArray შედეგები; 
+    !!!აუცილებლად გამოიყენეთ bind მეთოდი
+*/
+let factory = {
+    facName: "Volkswagen Wolfsburg Plant",
+    calculateWorkload: function () {
+      let workloadList =[];
+      for(let i=0; i<this.employeeWeeklyWorkload.length; i++){
+        workloadList.push(this.employeeWeeklyWorkload[i].workload)
+      }
+      return workloadList;
+    },
+    formatArray: function (name) {
+      let data = [];
+      for(let i=0; i<this.employees.length;i++){
+        data.push({ name: this.employees[i].name, timeLeft: 5-this.employees[i].timeSpent });
+      }
+      return data;
+    },
+  };
+
+  let factoryEmployees = {
+    employees: [
+      { name: "John", timeSpent: 1 },
+      { name: "Sam", timeSpent: 3 },
+      { name: "Maria", timeSpent: 2 },
+      { name: "Dan", timeSpent: 4 },
+      { name: "Lorelai", timeSpent: 5 },
+    ],
+      employeeNum: this.employees.length,
+  };
+
+  let workloadData = {
+    employeeWeeklyWorkload: [
+      { name: "John", workload: 40 },
+      { name: "Sam", workload: 25 },
+      { name: "Maria", workload: 28 },
+      { name: "Dan", workload: 30 },
+      { name: "Lorelai", workload: 31 },
+    ],
+  };
+  
+   console.log(factory.calculateWorkload.bind(workloadData)());
+   console.log(factory.formatArray.bind(factoryEmployees)());
+  //  task 2
+  /*
+  დაწერეთ ფუნქცია sumOfNumbers , რომელიც დააბრუნებს გადაცემული არგუმენტების ჯამს
+აღნიშნული ფუნქცია გაუშვით applyს საშუალებით, შესაბამისად არგუმენტებიც applyს მეშვეობით უნდა გადაცეთ.
+
+hint :  თუ კი ფუნქციაში არ გვაქვს this ქივორდის საჭიროება და შესაბამისად ობიექტი რომელსაც
+thisმა უნდა მიუთითოს შეგიძლიათ apply call-ს პირველი არგუმენტად გადასცეთ null 
+*/
+
+  function sumOfNumbers(){
+      let sum=0;
+      for(let i=0; i<arguments.length; i++){
+          sum+=arguments[i];
+       }
+       return sum;
+  }
+  const result = sumOfNumbers.apply(null,[20,9,87,30]);
+      console.log(result);
+  //Task 3
+  /*
+  const Vehicle = {
+    name: "Vehicle",
+    type: "vehicle",
+    start: function () {
+      return `starting the ${this.name} ${this.type}`;
+    },
+    stop: function () {
+      return `stopped the ${this.name} ${this.type}`;
+    },
+  /* 
+    შექმენით ახალი ობიექტი car რომელსაც ექნება ორი key name და type , გამოიძახეთ start და stop მეთოდები 
+    ამ ობიექტისთვის
+*/
+const Vehicle = {
+    name: "Vehicle",
+    type: "vehicle",
+    start: function () {
+      return `starting the ${this.name} ${this.type}`;
+    },
+    stop: function () {
+      return `stopped the ${this.name} ${this.type}`;
+    },
+  };
+    const car ={
+      name: "buggati",
+      type: "chiron",
+    }
+    let result1= Vehicle.start.call(car);
+    let result2= Vehicle.stop.call(car);
+    console.log(result1);
+    console.log(result2);
+
+  // task 4
+  /*
+  //გამოიყენეთ Math და apply მაქსიმალური მნიშვნელობის დასათვლელად მასივიდან
+  */
+
+  let numArray = [69,998,599,1340,2,799,27,43,689,432,];
+  let max = Math.max.apply(null,numArray);
+  console.log(max);
+
